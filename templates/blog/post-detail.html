@@ -1,22 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h4>{{ post.view }}</h4>
-<p>{{ post.category }}</p>
-<p>{{ post.tags }}</p>
-<p>{{ post.text }}</p>
-<p>{{ post.sub_title }}</p>
-<p>{{ post.title }}</p>
+{% extends 'blog/base.html' %}
+{% load blog_tags %}
 
+{% block post %}
+    {% category_list %}
+       {% if messages %}
+        {% for message in messages %}
+            <p style="color: peru;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    <p>{{ post.text }}</p>
+    <p>{{ post.sub_title }}</p>
+    <p>{{ post.title }}</p>
+    {% for tag in post.tags.all %}
+        <p>Теги {{ tag.name }}</p>
+    {% endfor %}
 
+    <p>Просмотров - {{ post.view }}</p>
+    <p>Дата - {{ post.created|date:"D d M y" }}</p>
 
- <a href="{% url 'post_list_url' %}" class="button">Вернуться</a>
-</body>
-</html>
+    <h3>Комментарии</h3>
+    {% if user.is_authenticated %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit">Отправить</button>
+        </form>
+    {% else %}
+        <p>Войдите на сайт или зарегистрируйтесь</p>
+    {% endif %}
 
+    {% for comment in post.comment_all %}
+        {% if forloop.counter|comment_padding %}
+            <p style="padding-left: 30px">
+        {% else %}
+            <p>
+{% endif %}
 
+            {{ comment.user }}<br>
+            {{ comment.text }}<br>
+            <small>{{ comment.created }}</small>
+        </p>
+    {% endfor %}
+
+{% endblock post %}
 

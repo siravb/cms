@@ -1,0 +1,4 @@
+.main-blog {
+    display: grid;
+    grid-template-columns: 15% 80%;
+}

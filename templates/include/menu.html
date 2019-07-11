@@ -1,0 +1,21 @@
+<uL>
+    <li><a href="#">Home</a></li>
+    <li><a href="{% url 'feedback' %}">Контакты</a></li>
+    {% if user.is_authenticated %}
+        <li><a href="/accounts/logout/">Выйти</a></li>
+    {% else %}
+        <li><a href="/accounts/login/">Войти</a></li>
+    {% endif %}
+
+
+{% comment %}
+
+</uL>
+<h3>Категории</h3>
+<ul>
+    {% for category in list_category %}
+    <li><a href="/">{{ category.name }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endcomment %}

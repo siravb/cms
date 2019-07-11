@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="main-blog">
+        <div class="sidebar">
+            {% block sidebar %}
+                {% include 'blog/sidebar.html' %}
+            {% endblock sidebar %}
+        </div>
+
+        <div class="content">
+            {% block post %}
+            {% endblock post %}
+        </div>
+    </div>
+{% endblock content %}

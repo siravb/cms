@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
                 ('rght', models.PositiveIntegerField(editable=False)),
                 ('tree_id', models.PositiveIntegerField(db_index=True, editable=False)),
                 ('level', models.PositiveIntegerField(editable=False)),
-                ('parent', mptt.fields.TreeForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='children', to='blog.Category')),
+                ('parent', mptt.fields.TreeForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='children', to='backend.blog.Category')),
             ],
             options={
                 'verbose_name': 'Категория',
@@ -58,8 +58,8 @@ class Migration(migrations.Migration):
                 ('sort', models.PositiveIntegerField(default=0, unique=True, verbose_name='Порядок')),
                 ('view', models.PositiveIntegerField(default=0, verbose_name='Просмотры')),
                 ('slug', models.SlugField(max_length=100, unique=True, verbose_name='url')),
-                ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='blog.Category', verbose_name='Категория')),
-                ('tags', models.ManyToManyField(to='blog.Tag', verbose_name='Теги')),
+                ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='backend.blog.Category', verbose_name='Категория')),
+                ('tags', models.ManyToManyField(to='backend.blog.Tag', verbose_name='Теги')),
             ],
             options={
                 'verbose_name': 'Статья',
@@ -73,7 +73,7 @@ class Migration(migrations.Migration):
                 ('text', models.TextField(verbose_name='Комментарий')),
                 ('created', models.DateTimeField(auto_now_add=True, verbose_name='Дата написания')),
                 ('moderation', models.BooleanField(default=False, verbose_name='Разрешено к публикации')),
-                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='blog.Post', verbose_name='Статья')),
+                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='backend.blog.Post', verbose_name='Статья')),
             ],
             options={
                 'verbose_name': 'Комментарий',
